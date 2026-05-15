@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest==9.0.3
+pytest-cov==7.1.0
+pycodestyle==2.14.0
+httpx==0.28.1
