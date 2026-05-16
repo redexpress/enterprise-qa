@@ -15,7 +15,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build packages
-        run: ./release.sh
+        run: |
+          chmod +x release.sh
+          ./release.sh
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
