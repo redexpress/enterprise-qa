@@ -24,6 +24,6 @@ coverage.xml
 # macOS
 .DS_Store
 
-.vscode/
-*.swp
-*.swo
+# Logs
+logs/
+session.json

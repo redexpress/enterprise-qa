@@ -50,14 +50,14 @@ def test_format_projects():
 @patch("sys.argv", ["project_query.py", "张三"])
 @patch("tools.project_query.print")
 def test_main_success(mock_print):
-    """测试 main 函数正常执行"""
+    """Test main function executes successfully"""
     main()
     assert mock_print.called
 
 
 @patch("sys.argv", ["project_query.py"])
 def test_main_no_args():
-    """测试 main 函数无参数退出"""
+    """Test main function exits with no args"""
     import pytest
     with pytest.raises(SystemExit) as exc_info:
         main()
@@ -67,7 +67,7 @@ def test_main_no_args():
 @patch("sys.argv", ["project_query.py", "不存在的员工"])
 @patch("tools.project_query.print")
 def test_main_employee_not_found(mock_print):
-    """测试 main 函数员工不存在"""
+    """Test main function handles employee not found"""
     import sys
     with patch.object(sys, "exit") as mock_exit:
         main()

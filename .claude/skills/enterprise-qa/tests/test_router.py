@@ -4,20 +4,20 @@ from tools.router import load_session, save_session, SESSION_FILE, MAX_HISTORY
 
 
 def test_cache_hit():
-    """测试缓存命中"""
+    """Test cache hit"""
     cache.clear()
     set_cache("测试问题", "缓存结果")
     assert is_cache_hit("测试问题") is True
 
 
 def test_cache_miss():
-    """测试缓存未命中"""
+    """Test cache miss"""
     cache.clear()
     assert is_cache_hit("不存在的问题") is False
 
 
 def test_cache_with_ttl_expired():
-    """测试 TTL 过期"""
+    """Test TTL expired"""
     import time
     cache.clear()
     # "张三的部门" 含 DB 关键词，TTL=30分钟，用31分钟前的时间戳
@@ -27,7 +27,7 @@ def test_cache_with_ttl_expired():
 
 @patch("tools.router.subprocess.run")
 def test_route_uses_cache(mock_run):
-    """测试 route 使用缓存"""
+    """Test route uses cache"""
     cache.clear()
     mock_run.return_value = MagicMock(stdout="工具结果", returncode=0)
 
@@ -132,9 +132,9 @@ def test_main_no_args(mock_exit):
         pass
 
 
-# Session 多轮对话测试
+# Session multi-turn conversation tests
 def test_load_session_empty():
-    """测试空 session"""
+    """Test empty session"""
     import os
     # 确保 session 文件不存在
     if os.path.exists(SESSION_FILE):
@@ -144,7 +144,7 @@ def test_load_session_empty():
 
 
 def test_save_and_load_session():
-    """测试保存和加载 session"""
+    """Test save and load session"""
     import os
     import tempfile
 
@@ -178,7 +178,7 @@ def test_save_and_load_session():
 
 
 def test_session_max_history():
-    """测试 session 保留最近6条"""
+    """Test session keeps last 6 entries"""
     import os
     import tempfile
 
@@ -206,7 +206,7 @@ def test_session_max_history():
 
 @patch("tools.router.subprocess.run")
 def test_route_saves_session(mock_run):
-    """测试 route 执行后保存 session"""
+    """Test route saves session after execution"""
     import os
     import tempfile
 

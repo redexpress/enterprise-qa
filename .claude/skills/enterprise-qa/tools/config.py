@@ -29,6 +29,7 @@ DEFAULT_CONFIG = {
     }
 }
 
+
 # Load config file
 def load_config() -> dict:
     config = DEFAULT_CONFIG.copy()
@@ -42,6 +43,7 @@ def load_config() -> dict:
                 config.update(user_config)
 
     return config
+
 
 CONFIG = load_config()
 
