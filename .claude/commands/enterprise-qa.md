@@ -17,3 +17,4 @@ $ARGUMENTS
 
 ```bash
 sqlite3 enterprise.db ".tables"
+```

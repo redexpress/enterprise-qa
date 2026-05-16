@@ -25,6 +25,11 @@
 /enterprise-qa "王五符合晋升条件吗？"
 ```
 
+### 环境准备
+
+- Python 3.10+
+- sqlite3 命令（Windows 用户需自行安装，Linux/Mac 通常自带）
+
 ### 安装方式
 
 1. 将 `.claude/skills/enterprise-qa/` 目录放入 Claude Code 项目

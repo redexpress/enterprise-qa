@@ -12,8 +12,14 @@
 - [Development Standards](./convince.md) - Development standards
 - [Exam Instructions](./enterprise-qa-exam.md) - Detailed exam requirements
 - [Unit Test Report](htmlcov/index.html) - Generated after running build.sh
+- Using MiniMax M2.7 with Claude Code - [Test Results](./test.md)
 
 ## Usage
+
+### System Requirements
+
+- Python 3.8+
+- sqlite3 command (Windows users need to install separately, Linux/Mac usually include it)
 
 ### Trigger Command
 

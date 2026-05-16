@@ -5,19 +5,33 @@
 
 张三的部门是研发部。
 
-来源：enterprise.db - employees 表
+数据来源：enterprise.db - employees 表
 
 /enterprise-qa "李四的上级是谁？"
 
 李四的上级是 CEO。
 
-来源：enterprise.db - employees 表
+数据来源：enterprise.db - employees 表
 
 /enterprise-qa 张三的邮箱是什么？
 
 张三的邮箱是 zhangsan@company.com。
 
-来源：enterprise.db - employees 表
+数据来源：enterprise.db - employees 表
+
+## 追加问题
+
+/enterprise-qa 张三的邮箱是什么？
+
+张三的邮箱是 zhangsan@company.com。
+
+数据数据来源：employees 表
+
+/enterprise-qa 李四呢？
+
+李四的邮箱是：lisi@company.com
+
+数据数据来源：employees 表
 
 ## KB
 
@@ -32,7 +46,7 @@
 入职 3 年 → 7 天
 入职 10 年 → 14 天
 入职 15 年以上 → 15 天（上限）
-来源：knowledge/faq.md §Q: 年假怎么计算？
+数据来源：knowledge/faq.md §Q: 年假怎么计算？
 
 /enterprise-qa "迟到几次扣钱？"
 
@@ -44,7 +58,7 @@
 7 次及以上	当旷工 1 天处理，通报批评
 **迟到定义：**单次超过 9:30 到岗（含）即为迟到。
 
-来源：knowledge/hr_policies.md §迟到制度
+数据来源：knowledge/hr_policies.md §迟到制度
 
 ## 多表
 
@@ -57,13 +71,13 @@ PRJ-001	ReMe 记忆框架	active	lead
 PRJ-002	智能问答系统	planning	core
 PRJ-003	移动端 App	active	contributor
 PRJ-004	数据分析平台	completed	lead
-来源：enterprise.db - projects 表, project_members 表
+数据来源：enterprise.db - projects 表, project_members 表
 
 /enterprise-qa "研发部有多少人？"
 
 研发部有 4 人。
 
-来源：employees 表
+数据来源：employees 表
 
 /enterprise-qa "王五符合晋升条件吗？"
 
@@ -75,7 +89,7 @@ PRJ-004	数据分析平台	completed	lead
 工作年限	≥1年	2.2年	通过
 KPI	≥85	80.0	不通过
 项目数	≥3	1	不通过
-来源：
+数据来源：
 
 employees 表
 performance_reviews 表
@@ -90,7 +104,7 @@ knowledge/promotion_rules.md
 
 根据公司制度，累计 2 次暂不扣款，但会记录绩效影响。
 
-来源：enterprise.db - attendance 表 + hr_policies.md
+数据来源：enterprise.db - attendance 表 + hr_policies.md
 
 ## 边界
 
@@ -100,7 +114,7 @@ EMP-999 不存在。
 
 数据库中没有找到该员工编号的记录。
 
-来源：enterprise.db - employees 表
+数据来源：enterprise.db - employees 表
 
 /enterprise-qa "xyzabc123怎么报销？"
 
@@ -135,4 +149,4 @@ EMP-999 不存在。
 地点	研发部会议室
 参会	研发部全员（28人）
 主持	张三
-来源：meeting_notes/2026-03-15-tech-sync.md
+数据来源：meeting_notes/2026-03-15-tech-sync.md
