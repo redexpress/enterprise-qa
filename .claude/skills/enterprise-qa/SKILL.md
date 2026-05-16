@@ -189,4 +189,13 @@ Treat current date as:
 
 Timezone:
 Asia/Shanghai
+
+## Multi-turn Conversation
+
+When using `/enterprise-qa`:
+
+- Conversation history is saved to PROJECT_ROOT/logs/session.json
+- Last 6 rounds of context are automatically loaded
+- Support referencing previous turns: "那张三呢" automatically relates to the last query subject
+- Before answering, check session.json to understand conversation context
 ```

@@ -1,4 +1,6 @@
 
+#!/bin/bash
+
 threshold=80
 pytest .claude/skills/enterprise-qa/tests -v \
     --cov=.claude/skills/enterprise-qa/tools \

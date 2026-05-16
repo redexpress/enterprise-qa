@@ -1,16 +1,13 @@
-from pathlib import Path
+import logging
 import sqlite3
 import sys
 
-from tools.config import DB_PATH, KB_PATH
+from tools.config import DB_PATH, KB_PATH, setup_logging
 
-ROOT = Path(__file__).resolve().parents[4]
-
-DB_PATH = str(ROOT / "enterprise.db")
-KB_PATH = str(ROOT / "knowledge" / "promotion_rules.md")
+logger = setup_logging()
 
 
-def get_employee(conn: sqlite3.Connection, name: str):
+def get_employee(conn: sqlite3.Connection, name: str) -> sqlite3.Row | None:
     cursor = conn.execute(
         """
         SELECT employee_id, name, level, hire_date
@@ -54,14 +51,15 @@ def get_project_count(conn: sqlite3.Connection, employee_id: str) -> int:
 
 
 def load_rules() -> str:
-    return KB_PATH.read_text(encoding="utf-8")
+    from pathlib import Path
+    return Path(KB_PATH).read_text(encoding="utf-8")
 
 
 def evaluate_promotion(
     years: float,
     avg_kpi: float,
     project_count: int,
-):
+) -> dict[str, bool]:
     return {
         "years_ok": years >= 1,
         "kpi_ok": avg_kpi >= 85,
@@ -76,7 +74,7 @@ def build_result(
     years: float,
     avg_kpi: float,
     project_count: int,
-    checks: dict,
+    checks: dict[str, bool],
 ) -> str:
 
     passed = all(checks.values())
@@ -116,6 +114,7 @@ def build_result(
 
 
 def check_promotion(name: str) -> str:
+    logger.info(f"Checking promotion: {name}")
 
     conn = sqlite3.connect(DB_PATH)
 
@@ -154,6 +153,8 @@ def check_promotion(name: str) -> str:
 
 
 def main():
+    logger.info("Promotion check module initialized")
+
     if len(sys.argv) < 2:
         print("usage: promotion_check.py <question>")
         return

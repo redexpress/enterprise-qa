@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import logging
 import sqlite3
 import sys
 from pathlib import Path
 
-from tools.config import DB_PATH
+from tools.config import DB_PATH, setup_logging
 
+logger = setup_logging()
 ROOT_DIR = Path(__file__).resolve().parents[4]
 
 DB_PATH = str(ROOT_DIR / "enterprise.db")
@@ -18,13 +20,13 @@ ROLE_MAP = {
 }
 
 
-def get_conn():
+def get_conn() -> sqlite3.Connection:
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
 
-def get_employee_id(name: str):
+def get_employee_id(name: str) -> str | None:
 
     conn = get_conn()
     try:
@@ -45,7 +47,7 @@ def get_employee_id(name: str):
         conn.close()
 
 
-def query_projects(employee_id: str):
+def query_projects(employee_id: str) -> list[dict]:
     conn = get_conn()
     try:
 
@@ -69,7 +71,7 @@ def query_projects(employee_id: str):
         conn.close()
 
 
-def format_projects(employee_name: str, projects: list[dict]):
+def format_projects(employee_name: str, projects: list[dict]) -> str:
 
     if not projects:
         return f"{employee_name} 没有参与项目。"
@@ -91,6 +93,7 @@ def format_projects(employee_name: str, projects: list[dict]):
 
 
 def main():
+    logger.info("Project query module initialized")
 
     if len(sys.argv) < 2:
         print("Usage:")
@@ -98,6 +101,7 @@ def main():
         sys.exit(1)
 
     name = sys.argv[1]
+    logger.info(f"Querying projects: {name}")
     employee_id = get_employee_id(name)
     if not employee_id:
         print(f"未找到员工：{name}")

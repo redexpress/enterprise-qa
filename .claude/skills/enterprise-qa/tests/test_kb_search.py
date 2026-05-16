@@ -144,3 +144,26 @@ def test_search_kb_recent_events(monkeypatch, tmp_path):
 
     assert "2026年3月15日" in result or "技术同步会" in result
     assert "faq.md" not in result or "工资" not in result
+
+
+def test_load_markdown_files_path_not_exist(tmp_path):
+    import tools.kb_search as kb
+
+    non_existent_path = tmp_path / "non_existent_kb"
+    kb.KB_ROOT = non_existent_path
+
+    docs = kb.load_markdown_files()
+
+    assert docs == []
+
+
+def test_load_markdown_files_no_md_files(tmp_path):
+    import tools.kb_search as kb
+
+    kb.KB_ROOT = tmp_path
+
+    (tmp_path / "readme.txt").write_text("Some text", encoding="utf-8")
+
+    docs = kb.load_markdown_files()
+
+    assert docs == []

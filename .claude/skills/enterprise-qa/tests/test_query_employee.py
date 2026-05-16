@@ -305,3 +305,27 @@ def test_query_employee_department_count(tmp_path):
 
     assert "研发部有 4 人" in result
     assert "来源" in result
+
+
+def test_query_employee_db_path_not_found(tmp_path):
+    non_existent_db = tmp_path / "non_existent.db"
+
+    with patch("tools.query_employee.DB_PATH", str(non_existent_db)):
+        result = query_employee("张三的部门")
+
+    assert "Database file not found" in result
+
+
+def test_query_employee_connection_failure():
+    original_exists = Path.exists
+
+    def mock_exists(self):
+        if str(self).endswith(".db"):
+            return True  # pretend DB exists
+        return original_exists(self)
+
+    with patch.object(Path, "exists", mock_exists):
+        with patch("sqlite3.connect", side_effect=sqlite3.Error("Connection failed")):
+            result = query_employee("张三的部门")
+
+    assert "Database connection failed" in result
