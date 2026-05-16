@@ -72,6 +72,21 @@ chmod +x *.sh
 # Unit tests
 ./build.sh
 ```
+
+## Release
+
+Run `./release.sh` to build distributable packages:
+
+```bash
+./release.sh
+```
+
+Output:
+- `dist/enterprise-qa-skill-{version}.zip`
+- `dist/enterprise-qa-skill-{version}.tar.gz`
+
+Extract the zip to install the Skill.
+
 - Using MiniMax M2.7 with Claude Code - [Test Results](./test.md)
 ## Project Structure
 

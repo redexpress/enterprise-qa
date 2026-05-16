@@ -1,15 +1,10 @@
 import logging
-from pathlib import Path
 import sqlite3
 import sys
 
 from tools.config import DB_PATH, KB_PATH, setup_logging
 
 logger = setup_logging()
-ROOT = Path(__file__).resolve().parents[4]
-
-DB_PATH = str(ROOT / "enterprise.db")
-KB_PATH = str(ROOT / "knowledge" / "promotion_rules.md")
 
 
 def get_employee(conn: sqlite3.Connection, name: str) -> sqlite3.Row | None:
@@ -56,7 +51,8 @@ def get_project_count(conn: sqlite3.Connection, employee_id: str) -> int:
 
 
 def load_rules() -> str:
-    return KB_PATH.read_text(encoding="utf-8")
+    from pathlib import Path
+    return Path(KB_PATH).read_text(encoding="utf-8")
 
 
 def evaluate_promotion(

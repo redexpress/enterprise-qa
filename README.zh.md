@@ -72,6 +72,20 @@ chmod +x *.sh
 ./build.sh
 ```
 
+## Release 发布
+
+运行 `./release.sh` 构建可分发包：
+
+```bash
+./release.sh
+```
+
+输出：
+- `dist/enterprise-qa-skill-{version}.zip`
+- `dist/enterprise-qa-skill-{version}.tar.gz`
+
+解压 zip 即可安装 Skill。
+
 使用MiniMax M2.7加入Claude Code，功能测试的运行结果[test.md](./test.md)
 
 ## 项目结构

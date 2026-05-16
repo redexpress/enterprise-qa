@@ -12,7 +12,7 @@ knowledge_base:
   index_type: bm25  # 可选：bm25, embedding
 
 # 时区设置
-timezone: Asia/Shanghai
+# timezone: Asia/Shanghai
 
 # 日志配置
 logging:

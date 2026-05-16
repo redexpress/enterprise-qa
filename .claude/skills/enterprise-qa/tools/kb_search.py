@@ -11,6 +11,10 @@ KB_ROOT = Path(KB_PATH)
 
 def load_markdown_files() -> list[dict]:
 
+    if not KB_ROOT.exists():
+        logger.warning(f"Knowledge base path does not exist: {KB_ROOT}")
+        return []
+
     docs = []
 
     for path in KB_ROOT.rglob("*.md"):
@@ -24,6 +28,9 @@ def load_markdown_files() -> list[dict]:
             "path": path,
             "content": content,
         })
+
+    if not docs:
+        logger.warning(f"No markdown files found in: {KB_ROOT}")
 
     return docs
 

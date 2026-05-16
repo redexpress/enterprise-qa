@@ -1,15 +1,11 @@
 import logging
-from pathlib import Path
 import sqlite3
 import sys
-import re
 
 from tools.config import DB_PATH, setup_logging
+from tools.router_config import NAMES
 
 logger = setup_logging()
-ROOT = Path(__file__).resolve().parents[4]
-
-DB_PATH = str(ROOT / "enterprise.db")
 
 
 def parse_month(question: str) -> str:
@@ -25,13 +21,7 @@ def parse_month(question: str) -> str:
 
 def parse_employee(question: str) -> str | None:
 
-    employees = [
-        "张三",
-        "李四",
-        "王五",
-        "赵六",
-        "钱七",
-    ]
+    employees = NAMES
 
     for name in employees:
         if name in question:

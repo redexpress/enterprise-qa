@@ -21,3 +21,6 @@ ROUTES = [
 
 # Name extraction
 NAMES = ["张三", "李四", "王五", "赵六", "钱七", "孙八", "周九", "吴十"]
+
+# Department list
+DEPARTMENTS = ["研发部", "产品部", "市场部", "管理层"]
