@@ -86,7 +86,7 @@ chmod +x *.sh
 
 解压 zip 即可安装 Skill。
 
-使用MiniMax M2.7加入Claude Code，功能测试的运行结果[test.md](./test.md)
+使用MiniMax M2.7加入Claude Code，功能测试的运行结果[test.txt](./test.txt)
 
 ## 项目结构
 
