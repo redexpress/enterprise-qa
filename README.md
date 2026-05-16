@@ -12,7 +12,7 @@
 - [Development Standards](./convince.md) - Development standards
 - [Exam Instructions](./enterprise-qa-exam.md) - Detailed exam requirements
 - [Unit Test Report](htmlcov/index.html) - Generated after running build.sh
-- Using MiniMax M2.7 with Claude Code - [Test Results](./test.md)
+- Using MiniMax M2.7 with Claude Code - [Test Results](./test.txt)
 
 ## Usage
 
@@ -87,7 +87,7 @@ Output:
 
 Extract the zip to install the Skill.
 
-- Using MiniMax M2.7 with Claude Code - [Test Results](./test.md)
+- Using MiniMax M2.7 with Claude Code - [Test Results](./test.txt)
 ## Project Structure
 
 ```
