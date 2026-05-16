@@ -1,13 +1,15 @@
+import logging
 from pathlib import Path
 import re
 import sys
 
-from tools.config import KB_PATH
+from tools.config import KB_PATH, setup_logging
 
+logger = setup_logging()
 KB_ROOT = Path(KB_PATH)
 
 
-def load_markdown_files():
+def load_markdown_files() -> list[dict]:
 
     docs = []
 
@@ -26,7 +28,7 @@ def load_markdown_files():
     return docs
 
 
-def split_sections(content: str):
+def split_sections(content: str) -> list[dict]:
 
     sections = []
 
@@ -63,7 +65,7 @@ def split_sections(content: str):
     return sections
 
 
-def tokenize(text: str):
+def tokenize(text: str) -> list[str]:
     tokens = []
     chinese = re.findall(
         r"[\u4e00-\u9fff]",
@@ -81,7 +83,7 @@ def tokenize(text: str):
     return tokens
 
 
-def keyword_score(query: str, text: str,):
+def keyword_score(query: str, text: str) -> int:
     score = 0
     query_tokens = tokenize(query)
     text_tokens = tokenize(text)
@@ -92,9 +94,11 @@ def keyword_score(query: str, text: str,):
     return score
 
 
-def search_kb(question: str):
+def search_kb(question: str) -> str:
+    logger.info(f"Searching knowledge base: {question}")
 
     docs = load_markdown_files()
+    logger.debug(f"Loaded {len(docs)} documents")
 
     if "最近" in question or "会议" in question or "全员" in question:
         meeting_notes_dir = KB_ROOT / "meeting_notes"
@@ -147,7 +151,7 @@ def search_kb(question: str):
     return build_kb_result(best)
 
 
-def build_kb_result(result):
+def build_kb_result(result: dict) -> str:
 
     lines = []
 
@@ -173,6 +177,7 @@ def build_kb_result(result):
 
 
 def main():
+    logger.info("Knowledge base search module initialized")
 
     if len(sys.argv) < 2:
         print("usage: kb_search.py <question>")

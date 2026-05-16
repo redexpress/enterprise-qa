@@ -1,10 +1,13 @@
+import logging
 import sqlite3
 import sys
 
-from tools.config import DB_PATH
+from tools.config import DB_PATH, setup_logging
+
+logger = setup_logging()
 
 
-def get_employee_by_name(conn, name: str):
+def get_employee_by_name(conn: sqlite3.Connection, name: str) -> sqlite3.Row | None:
 
     cursor = conn.execute(
         """
@@ -25,7 +28,7 @@ def get_employee_by_name(conn, name: str):
     return cursor.fetchone()
 
 
-def get_manager(conn, manager_id: str):
+def get_manager(conn: sqlite3.Connection, manager_id: str) -> sqlite3.Row | None:
 
     cursor = conn.execute(
         """
@@ -39,7 +42,7 @@ def get_manager(conn, manager_id: str):
     return cursor.fetchone()
 
 
-def count_by_department(conn, department: str):
+def count_by_department(conn: sqlite3.Connection, department: str) -> int:
     cursor = conn.execute(
         "SELECT COUNT(*) FROM employees WHERE department = ? AND status = 'active'",
         (department,)
@@ -47,7 +50,7 @@ def count_by_department(conn, department: str):
     return cursor.fetchone()[0]
 
 
-def build_employee_result(row):
+def build_employee_result(row: sqlite3.Row) -> str:
 
     (
         employee_id,
@@ -72,7 +75,7 @@ def build_employee_result(row):
     return "\n".join(lines)
 
 
-def build_manager_result(employee_name, manager_name):
+def build_manager_result(employee_name: str, manager_name: str) -> str:
 
     return (
         f"{employee_name} 的上级是：{manager_name}\n\n"
@@ -80,7 +83,8 @@ def build_manager_result(employee_name, manager_name):
     )
 
 
-def query_employee(question: str):
+def query_employee(question: str) -> str:
+    logger.info(f"Querying employee: {question}")
 
     conn = sqlite3.connect(DB_PATH)
 
@@ -130,6 +134,7 @@ def query_employee(question: str):
 
 
 def main():
+    logger.info("Employee query module initialized")
 
     if len(sys.argv) < 2:
         print("usage: query_employee.py <question>")

@@ -1,0 +1,20 @@
+# Skill 配置文件示例
+# enterprise-qa-data/config.yaml.example
+
+# 数据库配置
+database:
+  type: sqlite
+  path: ./enterprise.db
+
+# 知识库配置
+knowledge_base:
+  root_path: ./knowledge
+  index_type: bm25  # 可选：bm25, embedding
+
+# 时区设置
+timezone: Asia/Shanghai
+
+# 日志配置
+logging:
+  level: WARNING  # DEBUG, INFO, WARNING, ERROR
+  file: ./logs/enterprise-qa.log

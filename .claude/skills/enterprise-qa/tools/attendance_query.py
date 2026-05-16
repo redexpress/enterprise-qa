@@ -1,10 +1,12 @@
+import logging
 from pathlib import Path
 import sqlite3
 import sys
 import re
 
-from tools.config import DB_PATH
+from tools.config import DB_PATH, setup_logging
 
+logger = setup_logging()
 ROOT = Path(__file__).resolve().parents[4]
 
 DB_PATH = str(ROOT / "enterprise.db")
@@ -38,7 +40,7 @@ def parse_employee(question: str) -> str | None:
     return None
 
 
-def get_employee_id(conn, name: str):
+def get_employee_id(conn: sqlite3.Connection, name: str) -> str | None:
 
     cursor = conn.execute(
         """
@@ -58,10 +60,10 @@ def get_employee_id(conn, name: str):
 
 
 def get_late_count(
-    conn,
+    conn: sqlite3.Connection,
     employee_id: str,
     month: str,
-):
+) -> int:
 
     cursor = conn.execute(
         """
@@ -86,7 +88,7 @@ def build_attendance_result(
     employee_name: str,
     month: str,
     late_count: int,
-):
+) -> str:
 
     lines = []
 
@@ -117,7 +119,8 @@ def build_attendance_result(
     return "\n".join(lines)
 
 
-def attendance_query(question: str):
+def attendance_query(question: str) -> str:
+    logger.info(f"Querying attendance: {question}")
 
     employee_name = parse_employee(question)
 
@@ -155,6 +158,7 @@ def attendance_query(question: str):
 
 
 def main():
+    logger.info("Attendance query module initialized")
 
     if len(sys.argv) < 2:
         print("usage: attendance_query.py <question>")
