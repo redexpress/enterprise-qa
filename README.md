@@ -5,6 +5,12 @@
   <a href="README.zh.md">简体中文</a>
 </p>
 
+## Unit Test Coverage
+
+![Unit Test Coverage](./unittest.png)
+
+Test coverage exceeds 90%.
+
 ## Documentation
 
 - [Requirements Specification](./srs.md) - Software requirements specification
