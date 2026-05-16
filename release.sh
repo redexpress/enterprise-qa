@@ -6,18 +6,15 @@ PROJECT_ROOT=$(pwd)
 DIST_DIR="$PROJECT_ROOT/dist"
 
 # Get version from git tag, VERSION file, or fallback
-GIT_TAG=$(git describe --tags --always --dirty 2>/dev/null)
+GIT_TAG=$(git tag --points-at HEAD | head -n 1)
 BUILD_DATE=$(date +%Y%m%d)
 
 if [ -n "$GIT_TAG" ]; then
-    # Has git tag: use it directly (e.g., v1.0.0)
     FULL_VERSION="$GIT_TAG"
 elif [ -f "$PROJECT_ROOT/VERSION" ]; then
-    # No git tag, has VERSION file: use it with date suffix
     VERSION=$(cat "$PROJECT_ROOT/VERSION")
     FULL_VERSION="${VERSION}-${BUILD_DATE}"
 else
-    # No tag, no VERSION: use fallback with date suffix
     FULL_VERSION="v0.9.0-${BUILD_DATE}"
 fi
 
