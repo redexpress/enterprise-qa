@@ -10,8 +10,6 @@ from tools.config import DB_PATH, setup_logging
 logger = setup_logging()
 ROOT_DIR = Path(__file__).resolve().parents[4]
 
-DB_PATH = str(ROOT_DIR / "enterprise.db")
-
 
 ROLE_MAP = {
     "lead": "负责人",
