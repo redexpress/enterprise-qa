@@ -22,6 +22,11 @@ def test_logging_config_from_file():
     import importlib
 
     config_file = Path(__file__).resolve().parents[4] / "config.yaml"
+
+    if not config_file.exists():
+        import pytest
+        pytest.skip("config.yaml not found at project root")
+
     original = config_file.read_text(encoding="utf-8")
 
     try:
