@@ -5,6 +5,12 @@
   <a href="README.zh.md">简体中文</a>
 </p>
 
+## Unit Test Coverage
+
+![Unit Test Coverage](./unittest.png)
+
+Test coverage exceeds 90%.
+
 ## Documentation
 
 - [Requirements Specification](./srs.md) - Software requirements specification
@@ -12,7 +18,7 @@
 - [Development Standards](./convince.md) - Development standards
 - [Exam Instructions](./enterprise-qa-exam.md) - Detailed exam requirements
 - [Unit Test Report](htmlcov/index.html) - Generated after running build.sh
-- Using MiniMax M2.7 with Claude Code - [Test Results](./test.md)
+- Using MiniMax M2.7 with Claude Code - [Test Results](./test.txt)
 
 ## Usage
 
@@ -87,7 +93,7 @@ Output:
 
 Extract the zip to install the Skill.
 
-- Using MiniMax M2.7 with Claude Code - [Test Results](./test.md)
+- Using MiniMax M2.7 with Claude Code - [Test Results](./test.txt)
 ## Project Structure
 
 ```

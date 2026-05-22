@@ -7,21 +7,18 @@ Before answering:
 
 Data locations:
 
-- PROJECT_ROOT/enterprise.db
-- PROJECT_ROOT/knowledge
+If PROJECT_ROOT/config.yaml exists, read database and knowledge base paths from it. Otherwise use defaults:
+- Database: PROJECT_ROOT/enterprise.db
+- Knowledge base: PROJECT_ROOT/knowledge
 
 Never use paths inside `.claude/skills`.
 
-Correct paths:
-
-```
-PROJECT_ROOT/enterprise.db
-PROJECT_ROOT/knowledge
-```
-
-Wrong paths:
-```
-grep -r "keyword" knowledge/
+Example config.yaml structure:
+```yaml
+database:
+  path: ./data/enterprise.db
+knowledge_base:
+  root_path: ./knowledge3
 ```
 
 Database Access

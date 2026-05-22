@@ -1,9 +1,50 @@
+from pathlib import Path
+
 from tools.kb_search import (
     split_sections,
     keyword_score,
     build_kb_result,
     tokenize,
 )
+from tools.config import KB_PATH
+
+
+def test_kb_config_loaded():
+    """Verify KB_ROOT matches config KB_PATH and exists"""
+    import tools.kb_search as kb
+    assert kb.KB_ROOT == Path(KB_PATH)
+    assert kb.KB_ROOT.exists(), f"KB_ROOT {kb.KB_ROOT} does not exist"
+
+
+def test_logging_config_from_file():
+    """Test logging level is read from config and restored after test"""
+    import yaml
+    import importlib
+
+    config_file = Path(__file__).resolve().parents[4] / "config.yaml"
+
+    if not config_file.exists():
+        import pytest
+        pytest.skip("config.yaml not found at project root")
+
+    original = config_file.read_text(encoding="utf-8")
+
+    try:
+        # Modify config: set LOG_LEVEL to INFO
+        config = yaml.safe_load(original)
+        config["logging"]["level"] = "INFO"
+        config_file.write_text(yaml.dump(config), encoding="utf-8")
+
+        # Reload config
+        import tools.config
+        importlib.reload(tools.config)
+
+        from tools.config import LOG_LEVEL
+        assert LOG_LEVEL == "INFO", f"Expected INFO, got {LOG_LEVEL}"
+    finally:
+        # Restore original config
+        config_file.write_text(original, encoding="utf-8")
+        importlib.reload(tools.config)
 
 
 def test_split_sections():

@@ -5,6 +5,12 @@
   <a href="README.zh.md">简体中文</a>
 </p>
 
+## 单元测试覆盖率
+
+![单元测试覆盖率](unittest.png)
+
+测试覆盖率超过 90%。
+
 ## 文档
 
 - [需求规格说明书](./srs.md) - 软件需求规格
@@ -86,7 +92,7 @@ chmod +x *.sh
 
 解压 zip 即可安装 Skill。
 
-使用MiniMax M2.7加入Claude Code，功能测试的运行结果[test.md](./test.md)
+使用MiniMax M2.7加入Claude Code，功能测试的运行结果[test.txt](./test.txt)
 
 ## 项目结构
 
